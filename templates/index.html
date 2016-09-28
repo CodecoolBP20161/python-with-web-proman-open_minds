@@ -1,45 +1,157 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="UTF-8">
-        <!-- style links -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<html lang="en">
 
-        <!-- script links for bootstrap -->
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
         <!-- tabtitle -->
         <title>ProMan 1.0 Beta version</title>
 
+        <!-- Bootstrap Core CSS -->
+        <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Theme CSS -->
+        <link href="../static/css/freelancer.min.css" rel="stylesheet">
+
+
+        <!-- Custom Fonts -->
+        <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+
+        <!-- script links for bootstrap -->
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
     </head>
 
-    <body>
-        <!-- header -->
-        <div id="header" style="margin-top:150px;">
-            ProMan 1.0 Beta version
-        </div>
 
-        <!-- boxes container  -->
-        <div class="container">
+    <body id="page-top" class="index">
 
-            <!-- boards -->
-            <div id="boards"></div>
+        <!-- Navigation -->
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header page-scroll">
 
+                    <a class="navbar-brand" href="#page-top">ProMan - OpenMinds</a>
+                </div>
 
-            <!-- add task box -->
-            <div class="task-list">
-                <h3>Add a board</h3>
-
-                <form id="todo-form">
-                <input id="task"><button id="add">Add</button>
-                </form>
 
             </div>
+            <!-- /.container-fluid -->
+        </nav>
 
+
+        <section id="portfolio">
+            <!-- divportfolio title -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>BOARDS</h2>
+                        <hr class="star-primary">
+                    </div>
+
+                    <!-- add task box -->
+                    <div class="task-list">
+                        <h3>Add a board</h3>
+
+                        <form id="todo-form">
+                        <input id="task"><button id="add">Add</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div id="boards"></div>
+
+
+        <!-- Footer -->
+        <footer class="text-center">
+
+            <div class="footer-below">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            Copyright &copy; OpenMinds 2016
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+        <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+            <a class="btn btn-primary" href="#page-top">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </div>
+
+        <!-- Portfolio Modals -->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <h2>BOARD</h2>
+                                <hr class="star-primary">
+
+                                <!-- add task box -->
+                                <div class="task-list">
+                                    <h3>Add a card</h3>
+
+                                    <form id="todo-form">
+                                    <!-- <input id="task"><button id="add">Add</button> -->
+                                    <input id="task" type="text" placeholder="Give me a new card" class=""/><button id="add">Add</button>
+                                    <div id="boards"></div>
+                                    </form>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
+
+        <!-- jQuery -->
+        <script src="../static/vendor/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <script src="../static/js/jqBootstrapValidation.js"></script>
+        <script src="../static/js/contact_me.js"></script>
+
+        <!-- Theme JavaScript -->
+        <script src="../static/js/freelancer.min.js"></script>
+
+        <!-- ours js -->
         <script src="../static/js/scripts.js"></script>
 
     </body>

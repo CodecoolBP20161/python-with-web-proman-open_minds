@@ -46,9 +46,13 @@ function show() {
     var boards = get_boards();
 
     // the elements of board are listed in rows (with some html tags)
+
+    // <img src="../static/img/portfolio/cabin.png" class="img-responsive" alt="">
     var html = '<ul>';
     for(var i=0; i<boards.length; i++) {
-        html += '<li>' + boards[i] + '<button class="remove" id="' + i  + '">x</button></li>';
+        var startingTag= '<li><div class="row"><div class="col-sm-4 portfolio-item"><a href="#portfolioModal1" class="portfolio-link" data-toggle="modal"><div class="caption"><div class="caption-content"><i class="fa fa-search-plus fa-3x">';
+        var endingTag = '</i></div></div></a></div></div></li><button class="remove" id="' + i  + '">x</button>';
+        html += startingTag + boards[i] + endingTag;
     };
     html += '</ul>';
 
@@ -62,6 +66,9 @@ function show() {
         buttons[i].addEventListener('click', remove);
     };
 }
+
+
+
 
 // method to attach an event handler to the document
 document.getElementById('add').addEventListener('click', add);
