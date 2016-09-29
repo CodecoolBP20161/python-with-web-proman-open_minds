@@ -3178,6 +3178,7 @@ fieldset[disabled] .btn-primary.focus {
   color: #ffffff;
   background-color: #43ac6a;
   border-color: #3c9a5f;
+  width: 100%;
 }
 .btn-success:focus,
 .btn-success.focus {
@@ -7072,8 +7073,8 @@ input[type="checkbox"] {
 /*customized css*/
 .board-list {margin-top: 4em;}
 
-.card {
-    /* Add shadows to create the "card" effect */
+.board {
+    /* Add shadows to create the "board" effect */
     box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
     transition: 0.1s;
     margin: 2em;
@@ -7084,7 +7085,7 @@ input[type="checkbox"] {
 }
 
 /* On mouse-over, add a deeper shadow */
-.card:hover {
+.board:hover {
     box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.2);
 }
 
