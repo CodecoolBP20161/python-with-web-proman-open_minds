@@ -40,8 +40,9 @@ function show() {
     var html = '<ul>';
     for(var i=0; i<todos.length; i++) {
         html += '<div class="board">' +
-        '<button  class="btn btn-danger remove" id="' + i  + '">x</button>' +
-        todos[i] + '</div>';
+            '<button  class="btn btn-danger remove" id="' + i  + '">x</button>' +
+        todos[i] +
+            '<buttons class="btn btn-success" >show cards</buttons></div>'; //btn-block???
     };
     html += '</ul>';
 
