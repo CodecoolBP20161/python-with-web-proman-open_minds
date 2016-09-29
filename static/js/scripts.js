@@ -1,23 +1,21 @@
 // parsing
-function get_boards() {
-    var boards = new Array;
-    var boards_str = localStorage.getItem('board');
-    if (boards_str !== null) {
-        boards = JSON.parse(boards_str);
+function get_todos() {
+    var todos = new Array;
+    var todos_str = localStorage.getItem('todo');
+    if (todos_str !== null) {
+        todos = JSON.parse(todos_str);
     }
-    return boards;
+    return todos;
 }
 
 // add new board
 function add() {
     var task = document.getElementById('task').value;
-    // get_boards function is called
-    var boards = get_boards();
-    // append new task to boards
-    boards.push(task);
-    // save it and convert it  a JavaScript value to a JSON string
-    localStorage.setItem('board', JSON.stringify(boards));
-    // the show function is called
+
+    var todos = get_todos();
+    todos.push(task);
+    localStorage.setItem('todo', JSON.stringify(todos));
+
     show();
 
     return false;
@@ -25,51 +23,36 @@ function add() {
 
 // remove existing board
 function remove() {
-    // it returns the value of the attribute with the specified name
     var id = this.getAttribute('id');
-    // get_boards function is called
-    var boards = get_boards();
-    // adds/removes items to/from an array, and returns the removed item
-    boards.splice(id, 1);
-    // save it and convert it  a JavaScript value to a JSON string
-    localStorage.setItem('board', JSON.stringify(boards));
-    // the show function is called
+    var todos = get_todos();
+    todos.splice(id, 1);
+    localStorage.setItem('todo', JSON.stringify(todos));
+
     show();
 
     return false;
 }
 
-
 //  showing the board
 function show() {
-    // get_boards function is called
-    var boards = get_boards();
+    var todos = get_todos();
 
-    // the elements of board are listed in rows (with some html tags)
-
-    // <img src="../static/img/portfolio/cabin.png" class="img-responsive" alt="">
     var html = '<ul>';
-    for(var i=0; i<boards.length; i++) {
-        var startingTag= '<li><div class="row"><div class="col-sm-4 portfolio-item"><a href="#portfolioModal1" class="portfolio-link" data-toggle="modal"><div class="caption"><div class="caption-content"><i class="fa fa-search-plus fa-3x">';
-        var endingTag = '</i></div></div></a></div></div></li><button class="remove" id="' + i  + '">x</button>';
-        html += startingTag + boards[i] + endingTag;
+    for(var i=0; i<todos.length; i++) {
+        html += '<div class="card">' +
+        '<button  class="btn btn-danger remove" id="' + i  + '">x</button>' +
+        todos[i] + '</div>';
     };
     html += '</ul>';
 
-    // property sets or returns the HTML content (inner HTML) of an element
-    document.getElementById('boards').innerHTML = html;
+    document.getElementById('todos').innerHTML = html;
 
-    // at this moment created remove button, and here is called
     var buttons = document.getElementsByClassName('remove');
-    // set the remove button , so it will working as a delter button
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', remove);
     };
 }
 
 
-
-
-// method to attach an event handler to the document
 document.getElementById('add').addEventListener('click', add);
 show();
