@@ -33,16 +33,16 @@ function remove() {
     return false;
 }
 
-//  showing the board
+//  showing the boards
 function show() {
     var todos = get_todos();
 
     var html = '<ul>';
     for(var i=0; i<todos.length; i++) {
         html += '<div class="board" >' +
-            '<button  class="btn btn-danger remove" id="' + i  + '">x</button>' +
+            '<button  class="btn btn-danger btn-xs remove" id="' + i  + '">x</button>' +
         todos[i] +
-            '<buttons class="btn btn-success" data-toggle="modal" data-target="#boardModal">show cards</buttons></div>'; //btn-block???
+            '<buttons class="btn btn-default btn-block show-cards" data-toggle="modal" data-target="#boardModal">show cards</buttons></div>'; //btn-block???
     };
     html += '</ul>';
 

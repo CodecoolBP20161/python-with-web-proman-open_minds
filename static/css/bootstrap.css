@@ -3178,7 +3178,6 @@ fieldset[disabled] .btn-primary.focus {
   color: #ffffff;
   background-color: #43ac6a;
   border-color: #3c9a5f;
-  width: 100%;
 }
 .btn-success:focus,
 .btn-success.focus {
@@ -7073,8 +7072,8 @@ input[type="checkbox"] {
 /*customized css*/
 .board-list {margin-top: 4em;}
 
-.board {
-    /* Add shadows to create the "board" effect */
+.board, .formbox{
+    /* Add shadows to create the "card" effect */
     box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
     transition: 0.1s;
     margin: 2em;
@@ -7082,12 +7081,25 @@ input[type="checkbox"] {
     float:left;
     width:250px;
     height:150px;
+    position:relative;
+    word-wrap: break-word;
+}
+
+.formbox {
+    margin-left: 70px;
 }
 
 /* On mouse-over, add a deeper shadow */
-.board:hover {
+.board:hover, .formbox:hover {
     box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.2);
 }
 
 .remove {margin: 0.5em;
+    float: right;
+}
+
+.show-cards {
+    position:absolute;
+    bottom:0;
+    left:0;
 }
