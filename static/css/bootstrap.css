@@ -7072,7 +7072,7 @@ input[type="checkbox"] {
 /*customized css*/
 .board-list {margin-top: 4em;}
 
-.board {
+.board, .formbox{
     /* Add shadows to create the "card" effect */
     box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
     transition: 0.1s;
@@ -7081,10 +7081,15 @@ input[type="checkbox"] {
     float:left;
     width:250px;
     height:150px;
+    position:relative;
+}
+
+.formbox {
+    margin-left: 70px;
 }
 
 /* On mouse-over, add a deeper shadow */
-.board:hover {
+.board:hover, .formbox:hover {
     box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.2);
 }
 
@@ -7092,18 +7097,8 @@ input[type="checkbox"] {
     float: right;
 }
 
-.formbox {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 2px 4px 8px 2px rgba(0,0,0,0.2);
-    transition: 0.1s;
-    margin: 2em;
-    margin-left: 70px;
-    padding: 0.5em;
-    float:left;
-    width:250px;
-    height:150px;
-}
-
-.formbox:hover {
-    box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.2);
+.show-cards {
+    position:absolute;
+    bottom:0;
+    left:0;
 }
