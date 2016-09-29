@@ -33,7 +33,6 @@ function remove() {
     return false;
 }
 
-
 //  showing the board
 function show() {
     var todos = get_todos();
