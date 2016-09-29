@@ -39,7 +39,9 @@ function show() {
 
     var html = '<ul>';
     for(var i=0; i<todos.length; i++) {
-        html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button></li>';
+        html += '<div class="card">' +
+        '<button  class="btn btn-danger remove" id="' + i  + '">x</button>' +
+        todos[i] + '</div>';
     };
     html += '</ul>';
 
