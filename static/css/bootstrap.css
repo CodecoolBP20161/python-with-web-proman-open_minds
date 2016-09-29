@@ -7082,6 +7082,7 @@ input[type="checkbox"] {
     width:250px;
     height:150px;
     position:relative;
+    word-wrap: break-word;
 }
 
 .formbox {
