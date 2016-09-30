@@ -41,17 +41,20 @@ function show() {
     for(var i=0; i<todos.length; i++) {
         html += '<div class="board" >' +
             '<button  class="btn btn-danger btn-xs remove" id="' + i  + '">x</button>' +
-        todos[i] +
-            '<buttons class="btn btn-default btn-block show-cards" data-toggle="modal" data-target="#boardModal">show cards</buttons></div>'; //btn-block???
-    };
+        '<p id="board_text">'+ todos[i] + '</p>' +
+            '<buttons class="btn btn-default btn-block show-cards" ' +
+            'data-toggle="modal" ' +
+            'data-target="#boardModal">show cards' +
+            '</buttons></div>';
+    }
     html += '</ul>';
 
     document.getElementById('todos').innerHTML = html;
 
     var buttons = document.getElementsByClassName('remove');
-    for (var i=0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', remove);
-    };
+    for (var n=0; n < buttons.length; n++) {
+        buttons[n].addEventListener('click', remove);
+    }
 }
 
 
