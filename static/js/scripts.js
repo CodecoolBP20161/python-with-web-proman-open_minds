@@ -40,13 +40,11 @@ function show() {
     var html = '<ul>';
     for(var i=0; i<todos.length; i++) {
         html += '<div class="board">' +
-            '<button  class="btn btn-danger btn-xs remove" id="' + i  + '">x</button>' +
-        '<p id="board_text">'+ todos[i] + '</p>' +
-            '<buttons class="btn btn-default btn-block show-cards" ' +
-            'data-toggle="modal" ' +
-            'data-target="#boardModal">show cards' +
-            '</buttons></div>';
+                '<span class=removeOnClick><button  class="btn btn-danger btn-xs remove" id="' + i  + '">x</button></span>' +
+                '<p id="board_text">'+ todos[i] + '</p>' +
+                '</div>';
     }
+
     html += '</ul>';
 
     document.getElementById('todos').innerHTML = html;
@@ -64,6 +62,13 @@ show();
 var $modal = $('.modal').modal({
     show: false
 });
+
 $('.board').on('click', function() {
     $modal.modal('show');
 });
+
+$(document).ready(function(){
+    $('.removeOnClick').on('click',function() {
+        event.stopPropagation();
+    })
+})
