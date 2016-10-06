@@ -7,6 +7,8 @@ $(document).ready(function(){
     // SET unique ID
     getUniqueId(dataBase);
 
+    // click event -- > if the "remove button" is clicked
+
     // click event -- > if the "add board button"  is clicked
     $('#add-board').click(function(){
 

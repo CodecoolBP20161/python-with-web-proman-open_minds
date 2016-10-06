@@ -4,11 +4,13 @@ function showBoard(data){
     var ul = $('<ul></ul>')
     $.each(data, function(i, board){
         ul.append('<div class="board">' +
-                '<span class=removeOnClick><button  class="btn btn-danger btn-xs remove" id="' + board.id  + '">x</button></span>' +
+                '<span class=removeOnClick><button class="btn btn-danger btn-xs remove" id="board_' + board.id  + '" >x</button></span>' +
                 '<p id="board_text">'+ board.title + '</p>' +
                 '</div>');
-            });
-    ul.appendTo('#board-container');
+        var removeButton = $('#board_' + String(board.id));
+        ul.appendTo('#board-container');
+    });
+
 
 }
 
@@ -16,7 +18,7 @@ function showBoard(data){
 function getUniqueId(dataBase){
 
     var objectList = dataBase.getData();
-    var boardIdList = []
+    var boardIdList = [];
 
     $.each(objectList, function(i, board){
         boardIdList.push(Number(board.id));
@@ -30,3 +32,16 @@ function getUniqueId(dataBase){
         return 1;
     }
 }
+
+// // SECTION: Remove given board
+// function removeBoard(dataBase) {
+//
+//     var objectList = dataBase.getData();
+//     // $.each(objectList, function(i, board){
+//         // ask the user wheter to delete or not the board
+//
+//         // $('#').remove();
+//
+//     });
+//
+// }
