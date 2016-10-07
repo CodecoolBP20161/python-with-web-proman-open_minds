@@ -3,12 +3,19 @@ function showBoard(data){
 
     var ul = $('<ul></ul>')
     $.each(data, function(i, board){
-        ul.append('<div class="board">' +
-                '<span class=removeOnClick><button class="btn btn-danger btn-xs remove" id="board_' + board.id  + '" >x</button></span>' +
+        ul.append('<div class="board" id="board_div'+ board.id +'">' +
+                '<span class=removeOnClick><button class="btn btn-danger btn-xs remove" data-remove-id = "'+board.id+'" >x</button></span>' +
                 '<p id="board_text">'+ board.title + '</p>' +
                 '</div>');
-        var removeButton = $('#board_' + String(board.id));
         ul.appendTo('#board-container');
+
+        $(".remove").click(function(){
+            var dataBase = new LocalStorage(localStorage)
+            var removeId = $(this).data('remove-id')
+            dataBase.deleteData(removeId);
+            $('#board_div'+ removeId).hide();
+
+        })
     });
 
 

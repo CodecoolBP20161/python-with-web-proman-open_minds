@@ -24,5 +24,9 @@ function LocalStorage(localStorage) {
 
     this.saveData = function(obj) {
         this.localStorage.setItem(String(obj.id), JSON.stringify(obj));
-    }
+    };
+
+    this.deleteData = function (id) {
+        this.localStorage.removeItem(id);
+    };
 }
