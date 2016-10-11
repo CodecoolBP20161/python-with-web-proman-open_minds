@@ -1,28 +1,20 @@
 $(document).ready(function(){
-    // new localStorage "object"
-    var dataBase = new LocalStorage(localStorage)
 
-    showBoard(dataBase.getData());
+    $('#card-container').hide();
+    var state = new State(new LocalStorageImp());
+    state.runBoardPage();
 
-    // SET unique ID
-    getUniqueId(dataBase);
-
-    // click event -- > if the "remove button" is clicked
-
-    // click event -- > if the "add board button"  is clicked
     $('#add-board').click(function(){
-
-        var title = $('#input-board').val();
-        if (!title) {
-            alert("You have to fill the form!");
+        var inputTitle = $('#input-board-title').val();
+        var inputBody = $('#input-board-body').val();
+        if (inputTitle && inputBody){
+            state.postandshowBoard(inputTitle, inputBody);
         }
         else {
-            // localStorage.length is just a test, it has to be a unique !!!!!!!!
-            var board = new Board(title, getUniqueId(dataBase));
-            dataBase.saveData(board);
-
+            alert("Pls fill all!")
         }
-
     });
+
+
 
 });

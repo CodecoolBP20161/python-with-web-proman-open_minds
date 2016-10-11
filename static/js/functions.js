@@ -1,54 +1,46 @@
-// SECTION: Append new added board to index.html
-function showBoard(data){
+// outsource from model.js the different functions
 
-    var ul = $('<ul></ul>')
-    $.each(data, function(i, board){
-        ul.append('<div class="board" id="board_div'+ board.id +'">' +
-                '<span class=removeOnClick><button class="btn btn-danger btn-xs remove" data-remove-id = "'+board.id+'" >x</button></span>' +
-                '<p id="board_text">'+ board.title + '</p>' +
-                '</div>');
-        ul.appendTo('#board-container');
+function displayBoard(boardObject) {
 
-        $(".remove").click(function(){
-            var dataBase = new LocalStorage(localStorage)
-            var removeId = $(this).data('remove-id')
-            dataBase.deleteData(removeId);
-            $('#board_div'+ removeId).hide();
+    var divBoard = $('<div class="board" id=board_'+ boardObject.id +'></div>');
+    divBoard.append("<p>BOARD</p>");
+    divBoard.append("<p>"+ boardObject.title +" </p>");
+    divBoard.append("<p>"+ boardObject.body +" </p>");
+    var btnDelete = $('<button class="btn btn-danger">Delete</button>')
+    var state = new State(new LocalStorageImp());
+    btnDelete.on('click', function(){
 
-        })
+        state.delandshowBoard(boardObject.id);
+        var board = $('#board_'+ boardObject.id)
+        board.hide();
+    });
+    divBoard.append(btnDelete)
+    var showCard = $('<button id="cards" class="btn btn-default">Card(s)</button>')
+    divBoard.append(showCard)
+    divBoard.appendTo('#board-container');
+    showCard.on('click', function(){
+        $('#board-container').hide();
+        $('#card-container').show();
+        state.runCardPage(boardObject.id);
     });
 
 
 }
 
-// SECTION: Add unique id to the board
-function getUniqueId(dataBase){
 
-    var objectList = dataBase.getData();
-    var boardIdList = [];
-
-    $.each(objectList, function(i, board){
-        boardIdList.push(Number(board.id));
+function displayCard(cardObject) {
+    var divCard = $('<div class="card" id=card_'+ cardObject.id +'></div>');
+    divCard.append("<p>CARD</p>");
+    divCard.append("<p>"+ cardObject.title +" </p>");
+    divCard.append("<p>"+ cardObject.body +" </p>");
+    var btnDelete = $('<button class="btn btn-danger">Delete</button>')
+    btnDelete.on('click', function(){
+        var state = new State(new LocalStorageImp());
+        state.delandshowCard(cardObject.id);
+        var card = $('#card_'+ cardObject.id)
+        card.hide();
     });
+    divCard.append(btnDelete)
 
-    if (boardIdList.length > 0) {
-        var maxId = Math.max.apply(null, boardIdList);
-        return maxId += 1
-    }
-    else {
-        return 1;
-    }
+    divCard.appendTo('#card-container');
 }
-
-// // SECTION: Remove given board
-// function removeBoard(dataBase) {
-//
-//     var objectList = dataBase.getData();
-//     // $.each(objectList, function(i, board){
-//         // ask the user wheter to delete or not the board
-//
-//         // $('#').remove();
-//
-//     });
-//
-// }
