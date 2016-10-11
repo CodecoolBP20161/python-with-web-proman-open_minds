@@ -52,9 +52,9 @@ function State(imp) {
     this.getandshowCard = function(boardId){
         this.implementation.getandshowCard(boardId);
     }
-    // this.delandshowCard = function(){
-    //     this.implementation.delandshowCard();
-    // }
+    this.delandshowCard = function(boardId, cardId){
+        this.implementation.delandshowCard(boardId, cardId);
+    }
     this.postandshowCard = function(inputTitle, inputBody, boardId){
         this.implementation.postandshowCard(inputTitle, inputBody, boardId);
     }
@@ -133,11 +133,18 @@ function LocalStorageImp() {
         });
 
     };
-    // // del data
-    // this.delandshowCard = function(){
-    //
-    // };
-    //
+    // del data
+    this.delandshowCard = function(boardId, cardId){
+        var cardDict = JSON.parse(localStorage.getItem("cards_" + boardId));
+        for (var i in cardDict.cards) {
+            if (cardDict.cards[i].id === cardId){
+                cardDict.cards.splice(i, 1);
+                break;
+            }
+        }
+        localStorage.setItem("cards_" + boardId, JSON.stringify(cardDict))
+    };
+
     // save data
     this.postandshowCard = function(inputTitle, inputBody, boardId){
         var cardDict = JSON.parse(localStorage.getItem("cards_" + boardId))

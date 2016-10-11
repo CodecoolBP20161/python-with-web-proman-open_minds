@@ -36,7 +36,8 @@ function displayCard(cardObject) {
     var btnDelete = $('<button class="btn btn-danger">Delete</button>')
     btnDelete.on('click', function(){
         var state = new State(new LocalStorageImp());
-        state.delandshowCard(cardObject.id);
+
+        state.delandshowCard(cardObject.boardId, cardObject.id);
         var card = $('#card_'+ cardObject.id)
         card.hide();
     });
