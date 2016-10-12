@@ -7,7 +7,7 @@ function displayBoard(boardObject) {
     divBoard.append("<p>"+ boardObject.title +" </p>");
     divBoard.append("<p>"+ boardObject.body +" </p>");
     var btnDelete = $('<button class="btn btn-danger">Delete</button>')
-    var state = new State(new LocalStorageImp());
+    var state = new State(new DataBaseImp());
     btnDelete.on('click', function(){
 
         state.delandshowBoard(boardObject.id);
@@ -33,7 +33,7 @@ function displayCard(cardObject) {
     divCard.append("<p>"+ cardObject.body +" </p>");
     var btnDelete = $('<button class="btn btn-danger">Delete</button>')
     btnDelete.on('click', function(){
-        var state = new State(new LocalStorageImp());
+        var state = new State(new DataBaseImp());
 
         state.delandshowCard(cardObject.boardId, cardObject.id);
         var card = $('#card_'+ cardObject.id)
