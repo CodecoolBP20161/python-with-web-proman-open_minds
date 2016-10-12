@@ -7,5 +7,5 @@ from model import *
 
 db.connect()
 
-db.drop_tables([Board], safe=True, cascade=True)
-db.create_tables([Board], safe=True)
+db.drop_tables([Board, Card], safe=True, cascade=True)
+db.create_tables([Board, Card], safe=True)
