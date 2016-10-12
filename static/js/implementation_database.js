@@ -6,7 +6,22 @@ function DataBaseImp(){
     }
     this.getandshowBoard = function() {
         console.log("getandshowBoard")
+
+        $.ajax({
+          method: "GET",
+          url: '/api/'
+        })
+        .done(function( msg ) {
+            var boardDict = JSON.parse(msg)
+            var boardObject = new Board(null, boardDict.title, boardDict.body);
+            boardObject.display();
+        })
+        .fail(function() {
+            console.log( "error" );
+        });
     }
+
+
     this.delandshowBoard = function(boardId) {
         console.log("delete")
     }
