@@ -87,7 +87,20 @@ function DataBaseImp(){
     // this.delandshowCard = function(boardId, cardId){
     //
     // }
-    // this.postandshowCard = function(inputTitle, inputBody, boardId){
-    //
-    // }
+    this.postandshowCard = function(inputTitle, inputBody, boardId){
+        var cardObject = new Card(null, inputTitle, inputBody, boardId)
+
+        $.ajax({
+          method: "POST",
+          url: '/',
+          data: { card: JSON.stringify(cardObject) }
+        })
+        .done(function( msg ) {
+            console.log( "Data Saved: " + msg );
+            cardObject.display();
+        })
+        .fail(function() {
+            console.log( "error" );
+        });
+    }
 };
