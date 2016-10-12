@@ -12,19 +12,19 @@ function DataBaseImp(){
     }
 
     this.postandshowBoard = function(inputTitle, inputBody) {
-        var boardObject = new Board(inputTitle, inputBody)
+        var boardObject = new Board(null, inputTitle, inputBody)
 
         $.ajax({
           method: "POST",
-          url: '/api/',
+          url: '/',
           data: { board: JSON.stringify(boardObject) }
         })
         .done(function( msg ) {
-            alert( "Data Saved: " + msg );
+            console.log( "Data Saved: " + msg );
             boardObject.display();
         })
         .fail(function() {
-            alert( "error" );
+            console.log( "error" );
         });
 
 
