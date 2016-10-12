@@ -67,14 +67,16 @@ function DataBaseImp(){
 
         $.ajax({
           method: "GET",
-          url: '/api/'+ String(boardId)
+          url: '/board/'+ String(boardId)
         })
         .done(function( cardJsonList ) {
-            // console.log(boardJsonList)
+            // console.log(cardJsonList)
             var cardList = JSON.parse(cardJsonList);
             $.each(cardList, function(i, cardObject){
 
-                var card = new Board(cardObject.id, cardObject.title, cardObject.body);
+                // id, boardId, title, body
+                var card = new Card(cardObject.id, cardObject.board.id, cardObject.title, cardObject.body);
+                console.log(card)
                 card.display();
             })
         })
