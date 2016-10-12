@@ -27,20 +27,18 @@ def get_element_from_database():
     for element in Board.select():
         board_dict = model_to_dict(element)
         board_list.append(board_dict)
-
-        # print(board_json)
     return json.dumps(board_list)
 
 
-@app.route('/api/delete', methods=['POST'])
+@app.route('/api/', methods=['POST'])
 def delete_from_database():
     deleted_id_json = request.form['board']
     deleted_id_int = int(json.loads(deleted_id_json))
     print(type(deleted_id_int))
     element = Board.delete().where(deleted_id_int == Board.id)
     element.execute()
-
     return "deleted board??!! :)"
+
 
 
 

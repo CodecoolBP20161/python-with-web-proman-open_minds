@@ -18,7 +18,6 @@ function DataBaseImp(){
 
                 var board = new Board(boardObject.id, boardObject.title, boardObject.body);
                 board.display();
-
             })
         })
         .fail(function() {
@@ -26,13 +25,10 @@ function DataBaseImp(){
         });
     }
 
-
     this.delandshowBoard = function(boardId) {
-        // console.log("delete")
-
         $.ajax({
           method: "POST",
-          url: '/api/delete',
+          url: '/api/',
           data: { board: JSON.stringify(boardId) }
         })
         .done(function( msg ) {
@@ -42,8 +38,6 @@ function DataBaseImp(){
         .fail(function() {
             console.log( "error" );
         });
-
-
 
     }
 
@@ -62,18 +56,32 @@ function DataBaseImp(){
         .fail(function() {
             console.log( "error" );
         });
-
-
-
     }
 
     // CARD
-    // this.runCardPage = function(boardId) {
-    //
-    // }
-    // this.getandshowCard = function(boardId){
-    //
-    // }
+    this.runCardPage = function(boardId) {
+        this.getandshowCard(boardId)
+    }
+    this.getandshowCard = function(boardId){
+        console.log("getandshowCard")
+
+        $.ajax({
+          method: "GET",
+          url: '/api/'+ String(boardId)
+        })
+        .done(function( cardJsonList ) {
+            // console.log(boardJsonList)
+            var cardList = JSON.parse(cardJsonList);
+            $.each(cardList, function(i, cardObject){
+
+                var card = new Board(cardObject.id, cardObject.title, cardObject.body);
+                card.display();
+            })
+        })
+        .fail(function() {
+            console.log( "error" );
+        });
+    }
     // this.delandshowCard = function(boardId, cardId){
     //
     // }
