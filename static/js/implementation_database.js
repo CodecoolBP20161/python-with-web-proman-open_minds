@@ -12,7 +12,7 @@ function DataBaseImp(){
           url: '/api/'
         })
         .done(function( boardJsonList ) {
-            console.log(boardJsonList)
+            // console.log(boardJsonList)
             var boardList = JSON.parse(boardJsonList);
             $.each(boardList, function(i, boardObject){
 
@@ -28,7 +28,23 @@ function DataBaseImp(){
 
 
     this.delandshowBoard = function(boardId) {
-        console.log("delete")
+        // console.log("delete")
+
+        $.ajax({
+          method: "POST",
+          url: '/api/delete',
+          data: { board: JSON.stringify(boardId) }
+        })
+        .done(function( msg ) {
+            console.log( "Data Deleted: " + msg );
+            // boardObject.display();
+        })
+        .fail(function() {
+            console.log( "error" );
+        });
+
+
+
     }
 
     this.postandshowBoard = function(inputTitle, inputBody) {
