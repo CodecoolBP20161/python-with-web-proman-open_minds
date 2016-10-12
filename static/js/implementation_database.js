@@ -83,7 +83,7 @@ function DataBaseImp(){
             $.each(cardList, function(i, cardObject){
 
                 // id, boardId, title, body
-                var card = new Card(cardObject.id, cardObject.board.id, cardObject.title, cardObject.body);
+                var card = new Card(cardObject.id, cardObject.boardId.id, cardObject.title, cardObject.body);
                 console.log(card)
                 card.display();
             })
@@ -92,9 +92,20 @@ function DataBaseImp(){
             console.log( "error" );
         });
     }
-    // this.delandshowCard = function(boardId, cardId){
-    //
-    // }
+    this.delandshowCard = function(boardId, cardId){
+        $.ajax({
+          method: "POST",
+          url: '/board/ ' +String(boardId) + '/delete',
+          data: { card: JSON.stringify(cardId) }
+        })
+        .done(function( msg ) {
+            console.log( "Data Deleted: " + msg );
+            // boardObject.display();
+        })
+        .fail(function() {
+            console.log( "error" );
+        });
+    }
     this.postandshowCard = function(inputTitle, inputBody, boardId){
         var cardObject = new Card(null, boardId, inputTitle, inputBody)
 
