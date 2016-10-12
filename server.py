@@ -31,5 +31,18 @@ def get_element_from_database():
         # print(board_json)
     return json.dumps(board_list)
 
+
+@app.route('/api/delete', methods=['POST'])
+def delete_from_database():
+    deleted_id_json = request.form['board']
+    deleted_id_int = int(json.loads(deleted_id_json))
+    print(type(deleted_id_int))
+    element = Board.delete().where(deleted_id_int == Board.id)
+    element.execute()
+
+    return "deleted board??!! :)"
+
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
