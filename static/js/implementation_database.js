@@ -5,8 +5,6 @@ function DataBaseImp(){
         this.getandshowBoard()
     }
     this.getandshowBoard = function() {
-        console.log("getandshowBoard")
-
         $.ajax({
           method: "GET",
           url: '/api/'
@@ -33,7 +31,6 @@ function DataBaseImp(){
         })
         .done(function( msg ) {
             console.log( "Data Deleted: " + msg );
-            // boardObject.display();
         })
         .fail(function() {
             console.log( "error" );
@@ -71,20 +68,14 @@ function DataBaseImp(){
         })
     }
     this.getandshowCard = function(boardId){
-        console.log("getandshowCard")
-
         $.ajax({
           method: "GET",
           url: '/board/'+ String(boardId)
         })
         .done(function( cardJsonList ) {
-            // console.log(cardJsonList)
             var cardList = JSON.parse(cardJsonList);
             $.each(cardList, function(i, cardObject){
-
-                // id, boardId, title, body
                 var card = new Card(cardObject.id, cardObject.boardId.id, cardObject.title, cardObject.body);
-                console.log(card)
                 card.display();
             })
         })
@@ -100,7 +91,7 @@ function DataBaseImp(){
         })
         .done(function( msg ) {
             console.log( "Data Deleted: " + msg );
-            // boardObject.display();
+            boardObject.display();
         })
         .fail(function() {
             console.log( "error" );
