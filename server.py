@@ -27,8 +27,6 @@ def get_board_from_database():
     for board in Board.select():
         board_dict = model_to_dict(board)
         board_list.append(board_dict)
-
-        # print(board_json)
     return json.dumps(board_list)
 
 
