@@ -12,3 +12,9 @@ class BaseModel(Model):
 class Board(BaseModel):
     title = CharField()
     body = CharField()
+
+
+class Card(BaseModel):
+    title = CharField()
+    body = CharField()
+    board = ForeignKeyField(Board, related_name='board')
