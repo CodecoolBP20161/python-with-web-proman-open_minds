@@ -28,7 +28,7 @@ function DataBaseImp(){
     this.delandshowBoard = function(boardId) {
         $.ajax({
           method: "POST",
-          url: '/api/',
+          url: '/api/delete',
           data: { board: JSON.stringify(boardId) }
         })
         .done(function( msg ) {
@@ -61,11 +61,14 @@ function DataBaseImp(){
     // CARD
     this.runCardPage = function(boardId) {
         this.getandshowCard(boardId)
+        var state = new State(new DataBaseImp());
         $('#add-card').click(function(){
             var inputTitle = $('#input-card-title').val();
             var inputBody = $('#input-card-body').val();
             if (inputTitle && inputBody){
                 state.postandshowCard(inputTitle, inputBody, boardId);
+            }
+        })
     }
     this.getandshowCard = function(boardId){
         console.log("getandshowCard")
@@ -93,11 +96,11 @@ function DataBaseImp(){
     //
     // }
     this.postandshowCard = function(inputTitle, inputBody, boardId){
-        var cardObject = new Card(null, inputTitle, inputBody, boardId)
+        var cardObject = new Card(null, boardId, inputTitle, inputBody)
 
         $.ajax({
           method: "POST",
-          url: '/',
+          url: '/board/'+ String(boardId),
           data: { card: JSON.stringify(cardObject) }
         })
         .done(function( msg ) {

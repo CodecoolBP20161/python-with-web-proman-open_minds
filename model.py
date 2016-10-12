@@ -17,4 +17,4 @@ class Board(BaseModel):
 class Card(BaseModel):
     title = CharField()
     body = CharField()
-    board = ForeignKeyField(Board, related_name='board')
+    boardId = ForeignKeyField(Board, related_name='board')
