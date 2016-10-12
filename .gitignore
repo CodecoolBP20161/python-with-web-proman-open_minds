@@ -135,3 +135,6 @@ fabric.properties
 
 # Pycharm things
 .idea/
+
+#config nextId (js)/next_id(python)
+nextId.ini
