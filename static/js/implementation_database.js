@@ -61,6 +61,11 @@ function DataBaseImp(){
     // CARD
     this.runCardPage = function(boardId) {
         this.getandshowCard(boardId)
+        $('#add-card').click(function(){
+            var inputTitle = $('#input-card-title').val();
+            var inputBody = $('#input-card-body').val();
+            if (inputTitle && inputBody){
+                state.postandshowCard(inputTitle, inputBody, boardId);
     }
     this.getandshowCard = function(boardId){
         console.log("getandshowCard")
@@ -97,6 +102,7 @@ function DataBaseImp(){
         })
         .done(function( msg ) {
             console.log( "Data Saved: " + msg );
+
             cardObject.display();
         })
         .fail(function() {
