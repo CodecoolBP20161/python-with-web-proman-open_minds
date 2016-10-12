@@ -11,10 +11,15 @@ function DataBaseImp(){
           method: "GET",
           url: '/api/'
         })
-        .done(function( msg ) {
-            var boardDict = JSON.parse(msg)
-            var boardObject = new Board(null, boardDict.title, boardDict.body);
-            boardObject.display();
+        .done(function( boardJsonList ) {
+            console.log(boardJsonList)
+            var boardList = JSON.parse(boardJsonList);
+            $.each(boardList, function(i, boardObject){
+
+                var board = new Board(boardObject.id, boardObject.title, boardObject.body);
+                board.display();
+
+            })
         })
         .fail(function() {
             console.log( "error" );

@@ -23,11 +23,13 @@ def post_data_to_database():
 
 @app.route('/api/', methods=['GET'])
 def get_element_from_database():
+    board_list = []
     for element in Board.select():
         board_dict = model_to_dict(element)
-        board_json = json.dumps(board_dict)
+        board_list.append(board_dict)
+
         # print(board_json)
-    return board_json
+    return json.dumps(board_list)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
