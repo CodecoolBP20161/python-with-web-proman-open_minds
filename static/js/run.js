@@ -24,7 +24,7 @@ $(document).ready(function(){
                 showClose: true,
                 showCloseText: 'close',
                 onBlurContainer: '.container',
-                template: '<p>Please fill all!</p>'
+                template: '<div><h1 id="avgrund">Please fill all!</h1></div>'
             });
 
         }
