@@ -1,6 +1,11 @@
-// dataBase constructor implementation  (State pattern)
+// FUNCTIONS OUTSOURCING
+var ajaxErrorHandling = function() {
+    console.log( "error" );
+}
+
+// dataBase constructor implementation  (State)
 function DataBaseImp(){
-    //BOARD
+    //SECTION: BOARD
     this.runBoardPage = function() {
         this.getandshowBoard()
     }
@@ -20,9 +25,7 @@ function DataBaseImp(){
                 board.display();
             })
         })
-        .fail(function() {
-            console.log( "error" );
-        });
+        .fail(ajaxErrorHandling);
     }
 
     // delete board from central database
@@ -35,9 +38,7 @@ function DataBaseImp(){
         .done(function( msg ) {
             console.log( "Data Deleted: " + msg );
         })
-        .fail(function() {
-            console.log( "error" );
-        });
+        .fail(ajaxErrorHandling);
 
     }
 
@@ -56,12 +57,10 @@ function DataBaseImp(){
             boardObject.id = boardId
             boardObject.display();
         })
-        .fail(function() {
-            console.log( "error" );
-        });
+        .fail(ajaxErrorHandling);
     }
 
-    // CARD
+    //SECTION: CARD
     this.runCardPage = function(boardId) {
         this.getandshowCard(boardId)
 
@@ -91,9 +90,7 @@ function DataBaseImp(){
                 card.display();
             })
         })
-        .fail(function() {
-            console.log( "error" );
-        });
+        .fail(ajaxErrorHandling);
     }
     // delete card from central database
     this.delandshowCard = function(boardId, cardId){
@@ -106,9 +103,7 @@ function DataBaseImp(){
             console.log( "Data Deleted: " + msg );
 
         })
-        .fail(function() {
-            console.log( "error" );
-        });
+        .fail(ajaxErrorHandling);
     }
     // save board to the central database
     this.postandshowCard = function(inputTitle, inputBody, boardId){
@@ -125,9 +120,7 @@ function DataBaseImp(){
             cardObject.display();
             resetInputField();
         })
-        .fail(function() {
-            console.log( "error" );
-        });
+        .fail(ajaxErrorHandling);
     }
 
 };

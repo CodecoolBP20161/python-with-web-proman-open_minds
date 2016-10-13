@@ -26,6 +26,10 @@ function State(imp) {
     this.postandshowBoard = function(inputTitle, inputBody){
         this.implementation.postandshowBoard(inputTitle, inputBody);
     }
+    // 
+    // this.board = {
+    //     run:
+    // }
 
     // CARD
     this.runCardPage = function(boardId) {
