@@ -39,7 +39,6 @@ function DataBaseImp(){
             console.log( "Data Deleted: " + msg );
         })
         .fail(ajaxErrorHandling);
-
     }
 
     // save board to the central database
@@ -70,11 +69,29 @@ function DataBaseImp(){
             // input field's values
             var inputTitle = $('#input-card-title').val();
             var inputBody = $('#input-card-body').val();
-            if (inputTitle && inputBody){
+
+            if (inputTitle == "" && inputBody ==""){
+                $('#add-card').avgrund({
+                    height: 200,
+                    holderClass: 'custom',
+                    closeByEscape: true, // enables closing popup by 'Esc'..
+                    closeByDocument: true, // ..and by clicking document itself
+                    openOnEvent: true, // set to 'false' to init on load
+                    showClose: true,
+                    showCloseText: 'close',
+                    onBlurContainer: '.container',
+                    template: '<div><h1 id="avgrund">Please fill all!</h1></div>'
+                });
+
+            } else {
                 // save the card
                 state.postandshowCard(inputTitle, inputBody, boardId);
+                // empty card input field after submit
+                resetInputField();
+                // modal avground prohibited
+                $('#add-card').unbind('avgrund', onDocumentClick)
             }
-        })
+        });
     }
 
     // get card(s) from central database
