@@ -23,7 +23,7 @@ function displayBoard(boardObject) {
     });
     divBoard.append(btnDelete)
     // append board title & description
-    divBoard.append("<p> <strong>"+ boardObject.title +"</strong> </p>");
+    divBoard.append("<p class='titletext'> <strong>"+ boardObject.title +"</strong> </p>");
     divBoard.append("<p>"+ boardObject.body +" </p>");
 }
 
@@ -41,7 +41,7 @@ function displayCard(cardObject) {
     });
     divCard.append(btnDelete)
     // append card title & description
-    divCard.append("<p><strong>"+ cardObject.title +"</strong></p>");
+    divCard.append("<p class='titletext'><strong>"+ cardObject.title +"</strong></p>");
     divCard.append("<p>"+ cardObject.body +" </p>");
     divCard.appendTo('#card-container');
 }
