@@ -5,7 +5,13 @@ from model import *
 app = Flask(__name__)
 
 
-# server
+"""
+This file handles routes for the server. (The user sees just the index.)
+Every route returns a peewee model's method with request.form, if its needed.
+(More info about the model's methods, check the model.py)
+"""
+
+
 @app.route("/")
 def index():
     return render_template('index.html')

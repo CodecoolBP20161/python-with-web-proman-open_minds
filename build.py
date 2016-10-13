@@ -1,8 +1,8 @@
 from model import *
+
+
 # Configure your database connection here
 # database name = should be your username on your laptop
-
-
 def init_db():
     try:
         with open('db.ini') as f:

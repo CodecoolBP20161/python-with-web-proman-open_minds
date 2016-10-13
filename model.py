@@ -14,6 +14,9 @@ class Board(BaseModel):
     title = CharField()
     body = CharField()
 
+    # Get a request.form[something] from the server as an argument.
+    # Convert the JSON to dict, then to a model.
+    # After that save it to the database.
     @staticmethod
     def save_to_db(request_form):
         board_dict = json.loads(request_form)
@@ -21,6 +24,7 @@ class Board(BaseModel):
         board = Board.create(title=board_model.title, body=board_model.body)
         return str(board.id)
 
+    # Get all entries from the database, then convert models to dict and append to list, finally returns as a JSON.
     @staticmethod
     def load_from_db():
         board_list = []
@@ -29,6 +33,9 @@ class Board(BaseModel):
             board_list.append(board_dict)
         return json.dumps(board_list)
 
+    # Get a request.form[something] from the server as an argument.
+    # Convert the JSON to int.
+    # After that delete it to the database.
     @staticmethod
     def delete_from_db(request_form):
         deleted_id_json = request_form
@@ -43,6 +50,9 @@ class Card(BaseModel):
     body = CharField()
     boardId = ForeignKeyField(Board, related_name='board')
 
+    # Get a request.form[something] from the server as an argument.
+    # Convert the JSON to dict, then to a model.
+    # After that save it to the database.
     @staticmethod
     def save_to_db(request_form):
         card_dict = json.loads(request_form)
@@ -50,6 +60,7 @@ class Card(BaseModel):
         card = Card.create(title=card_model.title, body=card_model.body, boardId=card_model.boardId)
         return str(card.id)
 
+    # Get all entries from the database, then convert models to dict and append to list, finally returns as a JSON.
     @staticmethod
     def load_from_db(board_id):
         card_list = []
@@ -58,6 +69,9 @@ class Card(BaseModel):
             card_list.append(card_dict)
         return json.dumps(card_list)
 
+    # Get a request.form[something] from the server as an argument.
+    # Convert the JSON to int.
+    # After that delete it to the database.
     @staticmethod
     def delete_from_db(request_form):
         deleted_id_json = request_form
