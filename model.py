@@ -10,72 +10,81 @@ class BaseModel(Model):
         database = db
 
 
-class Board(BaseModel):
-    title = CharField()
-    body = CharField()
-
+class ModelTemplate(BaseModel):
     # Get a request.form[something] from the server as an argument.
     # Convert the JSON to dict, then to a model.
     # After that save it to the database.
     @staticmethod
-    def save_to_db(request_form):
-        board_dict = json.loads(request_form)
-        board_model = dict_to_model(Board, board_dict)
-        board = Board.create(title=board_model.title, body=board_model.body)
-        return str(board.id)
+    def save_to_db(model, request_form):
+        data_dict = json.loads(request_form)
+        data_model = dict_to_model(model, data_dict)
+        if model == Board:
+            data = Board.create(title=data_model.title, body=data_model.body)
+        elif model == Card:
+            data = Card.create(title=data_model.title, body=data_model.body, boardId=data_model.boardId)
+        else:
+            raise ValueError
+        return str(data.id)
 
     # Get all entries from the database, then convert models to dict and append to list, finally returns as a JSON.
     @staticmethod
-    def load_from_db():
-        board_list = []
-        for board in Board.select():
-            board_dict = model_to_dict(board)
-            board_list.append(board_dict)
-        return json.dumps(board_list)
+    def load_from_db(model, board_id=None):
+        data_list = []
+        if model == Board:
+            data_container = Board.select()
+        elif model == Card:
+            data_container = Card.select().join(Board).where(Board.id == board_id)
+        else:
+            raise ValueError
+        for item in data_container:
+            data_dict = model_to_dict(item)
+            data_list.append(data_dict)
+        return json.dumps(data_list)
 
     # Get a request.form[something] from the server as an argument.
     # Convert the JSON to int.
     # After that delete it to the database.
     @staticmethod
-    def delete_from_db(request_form):
+    def delete_from_db(model, request_form):
         deleted_id_json = request_form
         deleted_id_int = int(json.loads(deleted_id_json))
-        element = Board.delete().where(deleted_id_int == Board.id)
+        print(deleted_id_int)
+        print(model.id)
+        element = model.delete().where(deleted_id_int == model.id)
         element.execute()
-        return "board deleted"
+        return model.__name__ + " deleted"
 
 
-class Card(BaseModel):
+class Board(ModelTemplate):
+    title = CharField()
+    body = CharField()
+
+    @staticmethod
+    def save_model(request_form):
+        return ModelTemplate.save_to_db(Board, request_form)
+
+    @staticmethod
+    def load_model():
+        return ModelTemplate.load_from_db(Board)
+
+    @staticmethod
+    def delete_model(request_form):
+        return ModelTemplate.delete_from_db(Board, request_form)
+
+
+class Card(ModelTemplate):
     title = CharField()
     body = CharField()
     boardId = ForeignKeyField(Board, related_name='board')
 
-    # Get a request.form[something] from the server as an argument.
-    # Convert the JSON to dict, then to a model.
-    # After that save it to the database.
     @staticmethod
-    def save_to_db(request_form):
-        card_dict = json.loads(request_form)
-        card_model = dict_to_model(Card, card_dict)
-        card = Card.create(title=card_model.title, body=card_model.body, boardId=card_model.boardId)
-        return str(card.id)
+    def save_model(request_form):
+        return ModelTemplate.save_to_db(Card, request_form)
 
-    # Get all entries from the database, then convert models to dict and append to list, finally returns as a JSON.
     @staticmethod
-    def load_from_db(board_id):
-        card_list = []
-        for card in Card.select().join(Board).where(Board.id == board_id):
-            card_dict = model_to_dict(card)
-            card_list.append(card_dict)
-        return json.dumps(card_list)
+    def load_model(board_id):
+        return ModelTemplate.load_from_db(Card, board_id)
 
-    # Get a request.form[something] from the server as an argument.
-    # Convert the JSON to int.
-    # After that delete it to the database.
     @staticmethod
-    def delete_from_db(request_form):
-        deleted_id_json = request_form
-        deleted_id_int = int(json.loads(deleted_id_json))
-        element = Card.delete().where(deleted_id_int == Card.id)
-        element.execute()
-        return "card deleted"
+    def delete_model(request_form):
+        return ModelTemplate.delete_from_db(Card, request_form)
