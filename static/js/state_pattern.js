@@ -1,5 +1,6 @@
 // State pattern to handle storage as a Singleton pattern
 function State(imp) {
+    // singleton pattern to change the database (localstorage or central database)
     if (arguments.callee._singletonInstance) {
         return arguments.callee._singletonInstance;
     }
@@ -9,6 +10,9 @@ function State(imp) {
     this.changeImp = function(newImp) {
         this.implementation = newImp;
     }
+
+    // DEFINE THE METHODS FOR IMPLEMENTATIONS
+
     //BOARD
     this.runBoardPage = function() {
         this.implementation.runBoardPage();
