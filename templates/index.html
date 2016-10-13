@@ -23,7 +23,11 @@
                 <!-- <img src="static/img/favicon.ico" /> -->
                 <a class="navbar-brand" href="{{ url_for('index') }}">ProMan by OpenMinds</a>
             </div>
-
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">view boards</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -39,8 +43,7 @@
             <div class="formbox">
 
                     <fieldset>
-                        <!-- <div class="form-group" > -->
-                            <!-- <label class="control-label">create new board</label> -->
+                        <div class="form-group" >
                             <div class="input-group">
                                 <input type="text" maxlength="30" class="form-control" id="input-board-title" placeholder="new board title">
                                 <input type="text" maxlength="40" class="form-control" id="input-board-body" placeholder="new board details">
@@ -79,12 +82,10 @@
 
                     <fieldset>
                         <div class="form-group" >
-                            <!-- <label class="control-label">create new card</label> -->
                             <div class="input-group">
                                 <input type="text" maxlength="40" class="form-control" id="input-card-title" placeholder="new card title">
                                 <input type="text" maxlength="60" class="form-control" id="input-card-body" placeholder="new card details">
                                 <div class="form-group">
-                                    <!-- <div class="col-lg-10 col-lg-offset-4"> -->
                                     <div class="btn-group btn-group-justified">
                                         <button type="reset" id="reset" class="btn btn-default reset">
                                             <i class="fa fa-eraser" aria-hidden="true"></i>
