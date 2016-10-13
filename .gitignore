@@ -136,8 +136,8 @@ fabric.properties
 # Pycharm things
 .idea/
 
-# config nextId (js)/next_id(python)
-nextId.ini
-
 # Testing stuff
 test.py
+
+# db initialize
+db.ini
