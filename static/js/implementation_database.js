@@ -1,9 +1,11 @@
-// dataBase constructor implementation  (State)
+// dataBase constructor implementation  (State pattern)
 function DataBaseImp(){
     //BOARD
     this.runBoardPage = function() {
         this.getandshowBoard()
     }
+
+    // get board(s) from central database
     this.getandshowBoard = function() {
         $.ajax({
           method: "GET",
@@ -23,6 +25,7 @@ function DataBaseImp(){
         });
     }
 
+    // delete board from central database
     this.delandshowBoard = function(boardId) {
         $.ajax({
           method: "POST",
@@ -38,7 +41,9 @@ function DataBaseImp(){
 
     }
 
+    // save board to the central database
     this.postandshowBoard = function(inputTitle, inputBody) {
+        // creates a boardObject with null id, beacuse the id is generated with peewee on the server side
         var boardObject = new Board(null, inputTitle, inputBody)
 
         $.ajax({
@@ -46,8 +51,9 @@ function DataBaseImp(){
           url: '/',
           data: { board: JSON.stringify(boardObject) }
         })
-        .done(function( msg ) {
-            console.log( "Data Saved: " + msg );
+        .done(function( boardId ) {
+            // boardObject get id from server side
+            boardObject.id = boardId
             boardObject.display();
         })
         .fail(function() {
@@ -58,15 +64,21 @@ function DataBaseImp(){
     // CARD
     this.runCardPage = function(boardId) {
         this.getandshowCard(boardId)
+
         var state = new State(new DataBaseImp());
+        // create card button got an event
         $('#add-card').click(function(){
+            // input field's values
             var inputTitle = $('#input-card-title').val();
             var inputBody = $('#input-card-body').val();
             if (inputTitle && inputBody){
+                // save the card
                 state.postandshowCard(inputTitle, inputBody, boardId);
             }
         })
     }
+
+    // get card(s) from central database
     this.getandshowCard = function(boardId){
         $.ajax({
           method: "GET",
@@ -83,6 +95,7 @@ function DataBaseImp(){
             console.log( "error" );
         });
     }
+    // delete card from central database
     this.delandshowCard = function(boardId, cardId){
         $.ajax({
           method: "POST",
@@ -91,12 +104,13 @@ function DataBaseImp(){
         })
         .done(function( msg ) {
             console.log( "Data Deleted: " + msg );
-            boardObject.display();
+
         })
         .fail(function() {
             console.log( "error" );
         });
     }
+    // save board to the central database
     this.postandshowCard = function(inputTitle, inputBody, boardId){
         var cardObject = new Card(null, boardId, inputTitle, inputBody)
 
@@ -105,13 +119,15 @@ function DataBaseImp(){
           url: '/board/'+ String(boardId),
           data: { card: JSON.stringify(cardObject) }
         })
-        .done(function( msg ) {
-            console.log( "Data Saved: " + msg );
+        .done(function( cardId ) {
 
+            cardObject.id = cardId;
             cardObject.display();
+            resetInputField();
         })
         .fail(function() {
             console.log( "error" );
         });
     }
+
 };
