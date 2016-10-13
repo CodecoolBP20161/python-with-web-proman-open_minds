@@ -17,8 +17,8 @@ def index():
 def post_board_to_database():
     board_dict = json.loads(request.form['board'])
     board_model = dict_to_model(Board, board_dict)
-    Board.create(title=board_model.title, body=board_model.body)
-    return 'board created'
+    board = Board.create(title=board_model.title, body=board_model.body)
+    return str(board.id)
 
 
 @app.route('/api/', methods=['GET'])
@@ -43,8 +43,8 @@ def delete_board_from_database():
 def post_card_to_database(board_id):
     card_dict = json.loads(request.form['card'])
     card_model = dict_to_model(Card, card_dict)
-    Card.create(title=card_model.title, body=card_model.body, boardId=card_model.boardId)
-    return 'card created'
+    card = Card.create(title=card_model.title, body=card_model.body, boardId=card_model.boardId)
+    return str(card.id)
 
 
 @app.route('/board/<board_id>', methods=['GET'])

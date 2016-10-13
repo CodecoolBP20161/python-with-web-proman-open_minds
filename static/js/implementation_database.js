@@ -46,8 +46,10 @@ function DataBaseImp(){
           url: '/',
           data: { board: JSON.stringify(boardObject) }
         })
-        .done(function( msg ) {
-            console.log( "Data Saved: " + msg );
+        .done(function( boardId ) {
+            // console.log( "Data Saved: " + msg );
+            console.log(boardId)
+            boardObject.id = boardId
             boardObject.display();
         })
         .fail(function() {
@@ -91,7 +93,7 @@ function DataBaseImp(){
         })
         .done(function( msg ) {
             console.log( "Data Deleted: " + msg );
-            boardObject.display();
+
         })
         .fail(function() {
             console.log( "error" );
@@ -105,13 +107,29 @@ function DataBaseImp(){
           url: '/board/'+ String(boardId),
           data: { card: JSON.stringify(cardObject) }
         })
-        .done(function( msg ) {
-            console.log( "Data Saved: " + msg );
+        .done(function( cardId ) {
 
+            cardObject.id = cardId;
             cardObject.display();
+            resetInputField();
         })
         .fail(function() {
             console.log( "error" );
         });
     }
+
+        // $.ajax({
+        //   method: "GET",
+        //   url: '/board/'+ String(boardId)
+        // })
+        // .done(function( cardJsonList ) {
+        //     var cardList = JSON.parse(cardJsonList);
+        //     $.each(cardList, function(i, cardObject){
+        //         var card = new Card(cardObject.id, cardObject.boardId.id, cardObject.title, cardObject.body);
+        //         card.display();
+        //     })
+        // })
+        // .fail(function() {
+        //     console.log( "error" );
+        // });
 };
