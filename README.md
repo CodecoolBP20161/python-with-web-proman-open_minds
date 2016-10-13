@@ -1,12 +1,13 @@
-# ProMan 0.5 by OpenMinds 
+# ProMan 1.0 by OpenMinds
 
 ## Using ProMan:
 
-- to start using ProMan simply run `server.py`
+- to start using ProMan simply run `build.py`
+- then run  `server.py`
 - click on the `url` shown in your terminal
-- now you can create boards with titles (limited to 100 characters) which are saved to your browser's `local storage`
+- now you can create boards and cards on them
+- both of the boards and cards you can give title and details (limited to 100 characters) which are saved to `central db`
 - if you don't need a board anymore, you can delete it :)
-- beta feature: you can test the boards' detailed view function where you will be able to add cards in the next version
 
 !["preview"](static/img/preview_proman.png)
 

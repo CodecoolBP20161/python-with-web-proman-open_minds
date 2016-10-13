@@ -3,10 +3,17 @@
 function displayBoard(boardObject) {
 
     var divBoard = $('<div class="board" id=board_'+ boardObject.id +'></div>');
-    divBoard.append("<p>BOARD</p>");
-    divBoard.append("<p>"+ boardObject.title +" </p>");
-    divBoard.append("<p>"+ boardObject.body +" </p>");
-    var btnDelete = $('<button class="btn btn-danger">Delete</button>')
+    // append 'view board' buttons
+    var showCard = $('<button id="cards" class="btn btn-primary btn-xs showcardsbutton">view cards <i class="fa fa-list-alt" aria-hidden="true"></i> </button>')
+    divBoard.append(showCard)
+    divBoard.appendTo('#board-container');
+    showCard.on('click', function(){
+        $('#board-container').hide();
+        $('#card-container').show();
+        state.runCardPage(boardObject.id);
+    });
+    // append 'delete' buttons
+    var btnDelete = $('<button class="btn btn-default btn-xs delboardbutton"><i class="fa fa-trash" aria-hidden="true"></i></button>')
     var state = new State(new DataBaseImp());
     btnDelete.on('click', function(){
 
@@ -15,23 +22,16 @@ function displayBoard(boardObject) {
         board.hide();
     });
     divBoard.append(btnDelete)
-    var showCard = $('<button id="cards" class="btn btn-default">Card(s)</button>')
-    divBoard.append(showCard)
-    divBoard.appendTo('#board-container');
-    showCard.on('click', function(){
-        $('#board-container').hide();
-        $('#card-container').show();
-        state.runCardPage(boardObject.id);
-    });
+    // append board title & description
+    divBoard.append("<p> <strong>"+ boardObject.title +"</strong> </p>");
+    divBoard.append("<p>"+ boardObject.body +" </p>");
 }
 
 
 function displayCard(cardObject) {
     var divCard = $('<div class="card" id=card_'+ cardObject.id +'></div>');
-    divCard.append("<p>CARD</p>");
-    divCard.append("<p>"+ cardObject.title +" </p>");
-    divCard.append("<p>"+ cardObject.body +" </p>");
-    var btnDelete = $('<button class="btn btn-danger">Delete</button>')
+    // append 'delete' buttons
+    var btnDelete = $('<button class="btn btn-default btn-xs delcardbutton"><i class="fa fa-trash" aria-hidden="true"></i></button>')
     btnDelete.on('click', function(){
         var state = new State(new DataBaseImp());
 
@@ -40,7 +40,9 @@ function displayCard(cardObject) {
         card.hide();
     });
     divCard.append(btnDelete)
-
+    // append card title & description
+    divCard.append("<p><strong>"+ cardObject.title +"</strong></p>");
+    divCard.append("<p>"+ cardObject.body +" </p>");
     divCard.appendTo('#card-container');
 }
 
