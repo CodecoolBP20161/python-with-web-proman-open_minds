@@ -19,32 +19,32 @@ def index():
 
 @app.route('/', methods=['POST'])
 def post_board_to_database():
-    return Board.save_to_db(request.form['board'])
+    return Board.save_model(request.form['board'])
 
 
 @app.route('/api/', methods=['GET'])
 def get_board_from_database():
-    return Board.load_from_db()
+    return Board.load_model()
 
 
 @app.route('/api/delete', methods=['POST'])
 def delete_board_from_database():
-    return Board.delete_from_db(request.form['board'])
+    return Board.delete_model(request.form['board'])
 
 
 @app.route('/board/<board_id>', methods=['POST'])
 def post_card_to_database(board_id):
-    return Card.save_to_db(request.form['card'])
+    return Card.save_model(request.form['card'])
 
 
 @app.route('/board/<board_id>', methods=['GET'])
 def get_card_from_database(board_id):
-    return Card.load_from_db(board_id)
+    return Card.load_model(board_id)
 
 
 @app.route('/board/<board_id>/delete', methods=['POST'])
 def delete_card_from_database(board_id):
-    return Card.delete_from_db(request.form['card'])
+    return Card.delete_model(request.form['card'])
 
 
 if __name__ == "__main__":
