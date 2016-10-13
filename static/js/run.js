@@ -11,22 +11,35 @@ $(document).ready(function(){
         // inputf field's values
         var inputTitle = $('#input-board-title').val();
         var inputBody = $('#input-board-body').val();
-        if (inputTitle && inputBody){
-            // save the board
-            state.postandshowBoard(inputTitle, inputBody);
+        console.log(inputBody)
+        console.log(inputTitle)
+
+        if (inputTitle == "" && inputBody ==""){
+            $('#add-board').avgrund({
+                height: 200,
+                holderClass: 'custom',
+                closeByEscape: true, // enables closing popup by 'Esc'..
+                closeByDocument: true, // ..and by clicking document itself
+                openOnEvent: true, // set to 'false' to init on load
+                showClose: true,
+                showCloseText: 'close',
+                onBlurContainer: '.container',
+                template: '<p>Please fill all!</p>'
+            });
+
         }
         else {
-            alert("Pls fill all!")
+            // save the board
+            state.postandshowBoard(inputTitle, inputBody);
+            // empty board input field after submit
+            resetInputField();
+            // modal avground prohibited
+            $('#add-board').unbind('avgrund', onDocumentClick)
         }
-
-        // empty board input field after submit
-        resetInputField();
     });
 
     // reset button event
     $('.reset').on('click', function(){
         resetInputField();
     });
-
-
 });
