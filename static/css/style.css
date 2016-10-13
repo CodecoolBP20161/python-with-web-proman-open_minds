@@ -1,7 +1,20 @@
+/*header image properties*/
+.headericon {
+    height: 35px;
+    margin-top: 5px;
+}
+
 /*list pages' attributes*/
-.board-list, .card-list {
+.container {
     margin-top: 50px;
     position: relative;
+}
+
+/*back to board list button*/
+.backbutton {
+    text-align: center;
+    margin-left: 10px;
+    /*text-transform: uppercase;*/
 }
 
 /*tiles' attributes*/
@@ -13,15 +26,13 @@
     margin: 10px;
     padding: 10px;
     float: left;
-    display: inline-block;
     width: 250px;
     height: 170px;
-    position: relative;
     word-wrap: break-word;
 }
 
 /*dynamic shadow effect for the tiles*/
-.board:hover, .formbox:hover {
+.board:hover, .formbox:hover, .card:hover {
     box-shadow: 4px 8px 16px 4px rgba(0,0,0,0.2);
 }
 
@@ -48,6 +59,7 @@
 
 }
 
-.headericon {
-    height: 40px;
+/*makes board and card titles uppercase*/
+.titletext {
+    text-transform: uppercase;
 }
