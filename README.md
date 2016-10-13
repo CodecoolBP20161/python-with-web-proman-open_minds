@@ -20,4 +20,4 @@
 
 
 ### python-with-web-proman
-This is the second exercise in the Python with Web module, see instructions in Canvas
+This is the second project in the Python with Web module, see instructions in Canvas
