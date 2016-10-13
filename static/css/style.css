@@ -10,13 +10,6 @@
     position: relative;
 }
 
-/*back to board list button*/
-.backbutton {
-    text-align: center;
-    margin-left: 10px;
-    /*text-transform: uppercase;*/
-}
-
 /*tiles' attributes*/
 .board, .card, .formbox{
     position: relative;
@@ -57,6 +50,14 @@
     width: 85%;
     margin-bottom: 10px;
 
+}
+
+/*back to board list button*/
+.backbutton {
+    text-align: center;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: -5px;
 }
 
 /*makes board and card titles uppercase*/
