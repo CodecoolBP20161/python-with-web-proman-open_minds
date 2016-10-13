@@ -64,3 +64,9 @@
 .titletext {
     text-transform: uppercase;
 }
+
+/*modal*/
+#avgrund{
+    padding:30px;
+    vertical-align: middle;
+}
