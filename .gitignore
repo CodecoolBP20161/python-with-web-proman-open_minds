@@ -138,3 +138,6 @@ fabric.properties
 
 # Testing stuff
 test.py
+
+# db initialize
+db.ini
