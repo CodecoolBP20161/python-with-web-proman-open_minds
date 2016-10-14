@@ -11,8 +11,8 @@ $(document).ready(function(){
         // inputf field's values
         var inputTitle = $('#input-board-title').val();
         var inputBody = $('#input-board-body').val();
-        console.log(inputBody)
-        console.log(inputTitle)
+        console.log(inputBody);
+        console.log(inputTitle);
 
         if (inputTitle && inputBody){
             // save the board

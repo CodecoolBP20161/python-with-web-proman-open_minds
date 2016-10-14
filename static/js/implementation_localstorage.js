@@ -21,13 +21,13 @@ function LocalStorageImp() {
     };
     // del data
     this.delandshowBoard = function(boardId){
-        var dictBoard = JSON.parse(localStorage.boards)
+        var dictBoard = JSON.parse(localStorage.boards);
 
         for (var i in dictBoard.boards) {
             if (dictBoard.boards[i].id === boardId){
                 dictBoard.boards.splice(i, 1);
                 // delete all cards of given board
-                localStorage.removeItem("cards_" + boardId)
+                localStorage.removeItem("cards_" + boardId);
                 break;
             }
         }
@@ -35,13 +35,13 @@ function LocalStorageImp() {
     };
     // save data
     this.postandshowBoard = function(inputTitle, inputBody){
-        var boardDict = JSON.parse(localStorage.boards)
-        var boardObject = new Board(boardDict.nextId, inputTitle, inputBody)
+        var boardDict = JSON.parse(localStorage.boards);
+        var boardObject = new Board(boardDict.nextId, inputTitle, inputBody);
         var cardDict = {"nextId": 1, "boardId": boardObject.id, cards: []};
         localStorage.setItem("cards_" + boardObject.id, JSON.stringify(cardDict));
         boardObject.display();
-        boardDict.nextId += 1
-        boardDict.boards.push(boardObject)
+        boardDict.nextId += 1;
+        boardDict.boards.push(boardObject);
         localStorage.boards = (JSON.stringify(boardDict))
 
     };
@@ -88,11 +88,11 @@ function LocalStorageImp() {
 
     // save data
     this.postandshowCard = function(inputTitle, inputBody, boardId){
-        var cardDict = JSON.parse(localStorage.getItem("cards_" + boardId))
-        var cardObject = new Card(cardDict.nextId, boardId, inputTitle, inputBody)
-        cardDict.cards.push(cardObject)
-        cardDict.nextId += 1
-        cardObject.display()
+        var cardDict = JSON.parse(localStorage.getItem("cards_" + boardId));
+        var cardObject = new Card(cardDict.nextId, boardId, inputTitle, inputBody);
+        cardDict.cards.push(cardObject);
+        cardDict.nextId += 1;
+        cardObject.display();
         localStorage.setItem("cards_" + boardId, JSON.stringify(cardDict))
     };
 
