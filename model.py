@@ -1,4 +1,3 @@
-from playhouse.shortcuts import model_to_dict, dict_to_model
 from peewee import *
 from build import db
 import json
@@ -16,6 +15,7 @@ class ModelTemplate(BaseModel):
     # After that save it to the database.
     @staticmethod
     def save_to_db(model, request_form):
+        from playhouse.shortcuts import dict_to_model
         data_dict = json.loads(request_form)
         data_model = dict_to_model(model, data_dict)
         if model == Board:
@@ -29,6 +29,7 @@ class ModelTemplate(BaseModel):
     # Get all entries from the database, then convert models to dict and append to list, finally returns as a JSON.
     @staticmethod
     def load_from_db(model, board_id=None):
+        from playhouse.shortcuts import model_to_dict
         data_list = []
         if model == Board:
             data_container = Board.select()
@@ -48,8 +49,10 @@ class ModelTemplate(BaseModel):
     def delete_from_db(model, request_form):
         deleted_id_json = request_form
         deleted_id_int = int(json.loads(deleted_id_json))
-        print(deleted_id_int)
-        print(model.id)
+        # Delete the given Board's cards:
+        if model == Board:
+            cards_on_board = Card.delete().where(Card.boardId == deleted_id_int)
+            cards_on_board.execute()
         element = model.delete().where(deleted_id_int == model.id)
         element.execute()
         return model.__name__ + " deleted"
@@ -69,12 +72,16 @@ class Board(ModelTemplate):
 
     @staticmethod
     def delete_model(request_form):
+        # Pycharm said Board doesn't have id or __name__ attribute, but it isn't true.
+        # Look the console in your browser, when you delete an item.
         return ModelTemplate.delete_from_db(Board, request_form)
 
 
 class Card(ModelTemplate):
     title = CharField()
     body = CharField()
+    # Because of javascript:
+    # (anyway the foreignkey's name will be board_id)
     boardId = ForeignKeyField(Board, related_name='board')
 
     @staticmethod
@@ -87,4 +94,5 @@ class Card(ModelTemplate):
 
     @staticmethod
     def delete_model(request_form):
+        # That's the same cause like at 77-78 lines:
         return ModelTemplate.delete_from_db(Card, request_form)
