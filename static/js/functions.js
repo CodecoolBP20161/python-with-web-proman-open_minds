@@ -5,7 +5,7 @@ function displayBoard(boardObject) {
     var divBoard = $('<div class="board" id=board_'+ boardObject.id +'></div>');
     // adds 'view board' buttons
     var showCard = $('<button id="cards" class="btn btn-primary btn-xs showcardsbutton" title="view cards on this board"><i class="fa fa-list-alt" aria-hidden="true"></i> view cards</button>')
-    divBoard.append(showCard)
+    divBoard.append(showCard);
     divBoard.appendTo('#board-container');
     showCard.on('click', function(){
         $('#board-container').hide();
@@ -18,10 +18,10 @@ function displayBoard(boardObject) {
     btnDelete.on('click', function(){
 
         state.delandshowBoard(boardObject.id);
-        var board = $('#board_'+ boardObject.id)
+        var board = $('#board_'+ boardObject.id);
         board.hide();
     });
-    divBoard.append(btnDelete)
+    divBoard.append(btnDelete);
     // adds board title & description
     divBoard.append("<p class='titletext'> <strong>"+ boardObject.title +"</strong> </p>");
     divBoard.append("<p>"+ boardObject.body +" </p>");
@@ -36,10 +36,10 @@ function displayCard(cardObject) {
         var state = new State(new DataBaseImp());
 
         state.delandshowCard(cardObject.boardId, cardObject.id);
-        var card = $('#card_'+ cardObject.id)
+        var card = $('#card_'+ cardObject.id);
         card.hide();
     });
-    divCard.append(btnDelete)
+    divCard.append(btnDelete);
     // adds card title & description
     divCard.append("<p class='titletext'><strong>"+ cardObject.title +"</strong></p>");
     divCard.append("<p>"+ cardObject.body +" </p>");
