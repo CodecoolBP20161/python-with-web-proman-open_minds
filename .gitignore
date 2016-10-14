@@ -135,3 +135,9 @@ fabric.properties
 
 # Pycharm things
 .idea/
+
+# Testing stuff
+test.py
+
+# db initialize
+db.ini

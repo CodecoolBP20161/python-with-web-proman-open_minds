@@ -1,88 +1,179 @@
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <!-- modified bootstrap css -->
-        <link rel="stylesheet" href="../static/css/bootstrap.css">
-        
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="../static/js/modal.js"></script>
-        <script src="../static/js/jquery.js"></script>
 
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <!-- tabtitle -->
-        <title>ProMan 0.5</title>
+    <head>
+        <meta charset="utf-8">
+
+        <title>ProMan by OpenMinds</title>
+
+        <!-- style -->
+        <link rel="stylesheet" href="static/font-awesome-4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://labs.voronianski.com/media/style/reset.css">
+        <link rel="stylesheet" href="static/css/modal_plugin/avgrund.css">
+        <link rel="stylesheet" href="static/css/modal_plugin/modal.css">
+
+        <link rel="stylesheet" href="http://bootswatch.com/yeti/bootstrap.min.css" charset="utf-8">
+        <link rel="stylesheet" href="static/css/style.css" charset="utf-8">
+
+        <!-- favicon -->
+        <link rel="icon" href="static/img/favicon.ico" type="image/x-icon"/>
     </head>
 
     <body>
-        <!-- header -->
+        <!-- NAVBAR -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">ProMan 0.5 by Open Minds</a>
+                    <a class="navbar-brand" href="{{ url_for('index') }}">ProMan by OpenMinds</a>
+                    <img class="headericon" src="static/img/favicon.ico" />
                 </div>
-
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                </div>
             </div>
         </nav>
 
-        <!-- tiles container  -->
-        <div class="board-list">
+        <!-- BOARD CONTAINER -->
+        <div class="container" id="board-container">
 
-            <!-- 'create new board' box -->
-            <div class="formbox">
-                <form >
-                    <fieldset>
+            <div class="board-list">
+                <!-- "create new board" box -->
+                    <div class="formbox">
                         <div class="form-group" >
-                            <label class="control-label">create new board</label>
                             <div class="input-group">
-                                <input type="text" maxlength="100" class="form-control" id="task">
+
+                                <!-- board title -->
+                                <input type="text"
+                                       maxlength="30"
+                                       class="form-control"
+                                       id="input-board-title"
+                                       placeholder="new board title"
+                                       title="enter board title here"
+                                       required>
+
+                                <!-- board details -->
+                                <input type="text"
+                                       maxlength="40"
+                                       class="form-control"
+                                       id="input-board-body"
+                                       placeholder="new board details"
+                                       title="enter board details here"
+                                       required>
+
+                                <!-- form handling buttons -->
                                 <div class="form-group">
-                                    <div class="col-lg-10 col-lg-offset-4">
-                                        <button type="reset" class="btn btn-default">reset</button>
-                                        <button type="submit" class="btn btn-primary" id="add">create</button>
+                                    <div class="btn-group btn-group-justified">
+                                        <!-- reset button -->
+                                        <button type="reset"
+                                                id="reset"
+                                                class="btn btn-default
+                                                reset"
+                                                title="reset form">
+                                            <i class="fa fa-eraser" aria-hidden="true"></i>
+                                            reset
+                                        </button>
+
+                                        <!-- submit button -->
+                                        <button type="submit"
+                                                id="add-board"
+                                                class="btn btn-success"
+                                                title="create new board">
+                                            create
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </button>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-                    </fieldset>
-                </form>
+                    </div>
+
+                <!-- boards (generated by javascript)-->
+                <div id="board-container"></div>
+
             </div>
-
-            <!-- boards (generated by javascript)-->
-            <div id="todos"></div>
-
-            <div id="boardModal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                  </div>
-                  <div class="modal-body">
-
-                        <input type="text" maxlength="100" class="form-control" id="card_input">
-                        <button type="submit" class="btn btn-primary" id="card_button">create</button>
-
-                  </div>
-                  <div class="modal-footer">'
-                  </div>
-                </div>
-              </div>
-            </div>
-
         </div>
 
-        <!-- javascript -->
-        <script src="../static/js/scripts.js"></script>
+        <!-- CARD CONTAINER -->
+        <div class="container" id="card-container">
+
+            <!-- show board list button -->
+            <p>
+                <a href="/" class="btn btn-primary backbutton" title="back to all boards">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i> back to boards
+                </a>
+            </p>
+
+            <div class="card-list">
+
+                <!-- "create new board" box -->
+                <div class="formbox">
+                    <div class="form-group" >
+
+                        <!-- card title -->
+                        <div class="input-group">
+                            <input type="text"
+                                   maxlength="40"
+                                   class="form-control"
+                                   id="input-card-title"
+                                   placeholder="new card title"
+                                   title="enter card title"
+                                   required>
+
+                            <!-- card details -->
+                            <input type="text"
+                                   maxlength="60"
+                                   class="form-control"
+                                   id="input-card-body"
+                                   placeholder="new card details"
+                                   title="enter card details"
+                                   required>
+
+                            <!-- reset button -->
+                            <div class="form-group">
+                                <div class="btn-group btn-group-justified">
+                                    <button type="reset"
+                                            id="reset" class="btn btn-default reset"
+                                            title="reset form">
+                                        <i class="fa fa-eraser" aria-hidden="true"></i>
+                                        reset
+                                    </button>
+
+                                    <!-- submit button -->
+                                    <button type="submit"
+                                            id="add-card"
+                                            class="btn btn-success"
+                                            title="create new card">
+                                        create
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            <!-- boards (generated by javascript)-->
+            <div id="card-container"></div>
+        </div>
+
+    </div>
+
+
+    <!-- jQuery link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/js/modal_plugin/jquery.avgrund.js"></script>
+    <!-- JavaScript link -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- scripts -->
+    <script type="text/javascript" src="static/js/models.js"></script>
+    <script type="text/javascript" src="static/js/state_pattern.js"></script>
+    <script type="text/javascript" src="static/js/implementation_localstorage.js"></script>
+    <script type="text/javascript" src="static/js/implementation_database.js"></script>
+    <script type="text/javascript" src="static/js/functions.js"></script>
+    <script type="text/javascript" src="static/js/run.js"></script>
 
     </body>
 </html>
