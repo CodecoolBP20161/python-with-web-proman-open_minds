@@ -14,7 +14,16 @@ $(document).ready(function(){
         console.log(inputBody);
         console.log(inputTitle);
 
-        if (inputTitle == "" && inputBody ==""){
+        if (inputTitle && inputBody){
+            // save the board
+            state.postandshowBoard(inputTitle, inputBody);
+            // empty board input field after submit
+            resetInputField();
+            // modal avground prohibited
+            $('#add-board').unbind('avgrund', onDocumentClick)
+
+        }
+        else {
             $('#add-board').avgrund({
                 height: 200,
                 holderClass: 'custom',
@@ -24,17 +33,9 @@ $(document).ready(function(){
                 showClose: true,
                 showCloseText: 'close',
                 onBlurContainer: '.container',
-                template: '<div><h1 id="avgrund">Please fill all!</h1></div>'
+                template: '<div><h1 id="avgrund">Please fill all! </h1></div>'
             });
 
-        }
-        else {
-            // save the board
-            state.postandshowBoard(inputTitle, inputBody);
-            // empty board input field after submit
-            resetInputField();
-            // modal avground prohibited
-            $('#add-board').unbind('avgrund', onDocumentClick)
         }
     });
 
