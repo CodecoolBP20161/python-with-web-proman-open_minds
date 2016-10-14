@@ -18,12 +18,12 @@ class ModelTemplate(BaseModel):
         from playhouse.shortcuts import dict_to_model
         data_dict = json.loads(request_form)
         data_model = dict_to_model(model, data_dict)
-        if model == Board:
+        if model.__name__ is 'Board':
             data = Board.create(title=data_model.title, body=data_model.body)
-        elif model == Card:
+        elif model.__name__ is 'Card':
             data = Card.create(title=data_model.title, body=data_model.body, boardId=data_model.boardId)
         else:
-            raise ValueError
+            raise ValueError("The allowed arguments are Board or Card!")
         return str(data.id)
 
     # Get all entries from the database, then convert models to dict and append to list, finally returns as a JSON.
@@ -31,12 +31,12 @@ class ModelTemplate(BaseModel):
     def load_from_db(model, board_id=None):
         from playhouse.shortcuts import model_to_dict
         data_list = []
-        if model == Board:
+        if model.__name__ is 'Board':
             data_container = Board.select()
-        elif model == Card:
+        elif model.__name__ is 'Card':
             data_container = Card.select().join(Board).where(Board.id == board_id)
         else:
-            raise ValueError
+            raise ValueError("The allowed arguments are Board or Card!")
         for item in data_container:
             data_dict = model_to_dict(item)
             data_list.append(data_dict)
@@ -50,9 +50,13 @@ class ModelTemplate(BaseModel):
         deleted_id_json = request_form
         deleted_id_int = int(json.loads(deleted_id_json))
         # Delete the given Board's cards:
-        if model == Board:
+        if model.__name__ is 'Board':
             cards_on_board = Card.delete().where(Card.boardId == deleted_id_int)
             cards_on_board.execute()
+        elif model.__name__ is 'Card':
+            pass
+        else:
+            raise ValueError("The allowed arguments are Board or Card!")
         element = model.delete().where(deleted_id_int == model.id)
         element.execute()
         return model.__name__ + " deleted"
