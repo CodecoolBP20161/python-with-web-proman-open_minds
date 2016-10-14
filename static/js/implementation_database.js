@@ -70,7 +70,16 @@ function DataBaseImp(){
             var inputTitle = $('#input-card-title').val();
             var inputBody = $('#input-card-body').val();
 
-            if (inputTitle == "" && inputBody ==""){
+            if (inputTitle && inputBody){
+                // save the card
+                state.postandshowCard(inputTitle, inputBody, boardId);
+                // empty card input field after submit
+                resetInputField();
+                // modal avground prohibited
+                $('#add-card').unbind('avgrund', onDocumentClick)
+
+
+            } else {
                 $('#add-card').avgrund({
                     height: 200,
                     holderClass: 'custom',
@@ -82,14 +91,6 @@ function DataBaseImp(){
                     onBlurContainer: '.container',
                     template: '<div><h1 id="avgrund">Please fill all!</h1></div>'
                 });
-
-            } else {
-                // save the card
-                state.postandshowCard(inputTitle, inputBody, boardId);
-                // empty card input field after submit
-                resetInputField();
-                // modal avground prohibited
-                $('#add-card').unbind('avgrund', onDocumentClick)
             }
         });
     };
